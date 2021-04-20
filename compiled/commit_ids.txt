@@ -1,1 +1,2 @@
-/N/u/brlife/git/jsonlab
+/nii_func
+/func
