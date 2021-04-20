@@ -1,2 +1,0 @@
-/nii_func
-/func

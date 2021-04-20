@@ -17,7 +17,7 @@ if ~isdeployed
 end
 
 % Read in config.json.
-config = jsonencode(fileread('config.json'));
+config = jsondecode(fileread('config.json'));
 
 %% Regularization parameter.
 % Check that the user entered something for the regularization parameter.

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # compiled with MATLAB R2019b 10.14.6
-
+rm -rf compiled
 mkdir -p compiled
 
 cat > build.m <<END
