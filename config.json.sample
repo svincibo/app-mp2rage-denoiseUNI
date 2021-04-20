@@ -1,4 +1,6 @@
 {
-"mp2rage": "testdata/",
+"mag_inv1": "testdata/MP2RAGE_INV1.nii",
+"mag_inv2": "testdata/MP2RAGE_INV2.nii",
+"mag_unit1": "testdata/MP2RAGE_UNI.nii",
 "reg_param": "16"
 }

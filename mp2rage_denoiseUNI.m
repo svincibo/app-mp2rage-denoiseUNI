@@ -29,16 +29,14 @@ end
 
 %% MP2RAGE data.
 
-mp2rage_dir = dir(config.mp2rage);
-
 % UNI.
-MP2RAGE.filenameUNI = mp2rage_dir(find(contains((arrayfun(@(x) x.name, mp2rage_dir, 'UniformOutput', false)), 'UNI'))).name;
+MP2RAGE.filenameUNI = config.mag_unit1;
 
 % INV1.
-MP2RAGE.filenameINV1 = mp2rage_dir(find(contains((arrayfun(@(x) x.name, mp2rage_dir, 'UniformOutput', false)), 'INV1'))).name;
+MP2RAGE.filenameINV1 = config.mag_inv1;
 
 % INV2.
-MP2RAGE.filenameINV2 = mp2rage_dir(find(contains((arrayfun(@(x) x.name, mp2rage_dir, 'UniformOutput', false)), 'INV2'))).name;
+MP2RAGE.filenameINV2 = config.mag_inv2;
 
 % Assign output file name.
 MP2RAGE.filenameOUT=fullfile('output', ['MP2RAGE_denoised_reg' config.reg_param '.nii.gz']);
