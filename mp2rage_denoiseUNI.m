@@ -45,10 +45,13 @@ MP2RAGE.filenameOUT=fullfile('output', 'unit1.nii');
 
 
 % Save image for qa.
-saveas(gcf, fullfile('output', 'MP2RAGE_denoised.png'));
+saveas(gcf, fullfile('output', 'qa.png'));
 
 % Copy over mag.inv1.nii.gz and mag.inv1.nii.gz from input to output.
 copyfile(config.mag_inv1, fullfile('output', 'mag.inv1.nii.gz'));
+% copyfile( ---- json ----, fullfile('output', 'mag.inv2.json'));
+
 copyfile(config.mag_inv2, fullfile('output', 'mag.inv2.nii.gz'));
+% copyfile( ---- json ----, fullfile('output', 'mag.inv2.json'));
 
 
