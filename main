@@ -8,10 +8,10 @@ singularity exec -e docker://brainlife/mcr:2020a ./compiled/mp2rage_denoiseUNI
 
 #matlab -nosplash -nodisplay -r mp2rage_denoiseUNI.m
 
-gzip ./output/MP2RAGE_denoised.nii
+gzip ./output/unit1.nii
 
-if [ ! -f ./output/MP2RAGE_denoised.nii.gz ]; then
-       echo "mp2rage_denoiseUNI.m didn't produce MP2RAGE_denoised.nii.gz"
+if [ ! -f ./output/unit1.nii.gz ]; then
+       echo "mp2rage_denoiseUNI.m didn't produce a denoised unit1.nii.gz file"
        exit 1
 fi
 

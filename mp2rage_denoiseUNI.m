@@ -38,7 +38,7 @@ MP2RAGE.filenameINV1 = config.mag_inv1;
 MP2RAGE.filenameINV2 = config.mag_inv2;
 
 % Assign output file name.
-MP2RAGE.filenameOUT=fullfile('output', 'MP2RAGE_denoised.nii');
+MP2RAGE.filenameOUT=fullfile('output', 'unit1.nii');
 
 %% DENOISE.
 [MP2RAGEimgRobustPhaseSensitive]=RobustCombination(MP2RAGE, str2num(config.reg_param));
@@ -47,5 +47,8 @@ MP2RAGE.filenameOUT=fullfile('output', 'MP2RAGE_denoised.nii');
 % Save image for qa.
 saveas(gcf, fullfile('output', 'MP2RAGE_denoised.png'));
 
+% Copy over mag.inv1.nii.gz and mag.inv1.nii.gz from input to output.
+copyfile(config.mag_inv1, fullfile('output', 'mag.inv1.nii.gz'));
+copyfile(config.mag_inv2, fullfile('output', 'mag.inv2.nii.gz'));
 
 
