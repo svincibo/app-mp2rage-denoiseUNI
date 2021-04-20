@@ -1,4 +1,4 @@
-% function [] = mp2rage_denoiseUNI()
+function [] = mp2rage_denoiseUNI()
 
 % app-mp2rage-denoiseUNI
 
@@ -9,14 +9,17 @@
 % parameter that is appropriate for your dataset.
 
 % Setup json lab.
-if ~isdeployed
-    
-    addpath(genpath('/N/u/brlife/git/jsonlab'));
-    
-end
+% if ~isdeployed
+%     
+%     addpath(genpath('/N/u/brlife/git/jsonlab'));
+%     
+% end
+
+addpath(genpath('func'));
+addpath(genpath('nii_func'));
 
 % Read in config.json.
-config = loadjson('config.json.sample');
+config = loadjson('config.json');
 
 %% Regularization parameter.
 % Check that the user entered something for the regularization parameter.
@@ -40,7 +43,7 @@ MP2RAGE.filenameINV2 = mp2rage_dir(find(contains((arrayfun(@(x) x.name, mp2rage_
 % Assign output file name.
 MP2RAGE.filenameOUT=fullfile('output', ['MP2RAGE_denoised_reg' config.reg_param '.nii.gz']);
 
-% Remove background noise.
+%% DENOISE.
 [MP2RAGEimgRobustPhaseSensitive]=RobustCombination(MP2RAGE, double(reg_param));
 
 % Save image for qa.
