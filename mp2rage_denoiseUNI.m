@@ -8,18 +8,16 @@ function [] = mp2rage_denoiseUNI()
 % app-mp2rage-selectregparam can be used to help select a regularization
 % parameter that is appropriate for your dataset.
 
-% Setup json lab.
-% if ~isdeployed
-%     
-%     addpath(genpath('/N/u/brlife/git/jsonlab'));
-%     
-% end
-
-addpath(genpath('func'));
-addpath(genpath('nii_func'));
+% Setup environment.
+if ~isdeployed
+    
+    addpath(genpath('nii_func'));
+    addpath(genpath('func'));
+    
+end
 
 % Read in config.json.
-config = loadjson('config.json');
+config = jsonencode(fileread('config.json'));
 
 %% Regularization parameter.
 % Check that the user entered something for the regularization parameter.
