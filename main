@@ -22,7 +22,7 @@ cat << EOF > product.json
     "brainlife": [
         {
             "type": "image/png",
-	        "name": "Original and Denoised UNIT1",
+	    "name": "Original and Denoised UNIT1",
             "base64": "$(base64 -w 0 output/qa.png)"
         }
     ]
