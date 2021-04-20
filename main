@@ -4,9 +4,12 @@
 #PBS -l walltime=00:20:00
 #PBS -l vmem=30gb
 
-singularity exec -e docker://brainlife/mcr:r2019a ./compiled/mp2rage_denoiseUNI.m
+singularity exec -e docker://brainlife/mcr:2020a ./compiled/mp2rage_denoiseUNI
 
-matlab -nosplash -nodisplay -r mp2rage_denoiseUNI.m
+#matlab -nosplash -nodisplay -r mp2rage_denoiseUNI.m
+
+gzip ./output/MP2RAGE_denoised.nii
+
 if [ ! -f ./output/MP2RAGE_denoised.nii.gz ]; then
        echo "mp2rage_denoiseUNI.m didn't produce MP2RAGE_denoised.nii.gz"
        exit 1
