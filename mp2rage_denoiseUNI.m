@@ -51,17 +51,24 @@ else
     MP2RAGE.NZslices=[88 88];% Slices Per Slab * [PartialFourierInSlice-0.5  0.5] per Hu: PartialFourierInSlice = 1, so 176*[1-0.5 0.5] = 176*[0.5 0.5] = [88 88].
     MP2RAGE.FlipDegrees=[4 5];% Flip angle of the two readouts in degrees
 
-    % Read in mask.
-    mask = niftiRead(config.mask);
+    	% Read in mask.
+    	if exist(config.mask)
+    	
+	    	mask = niftiRead(config.mask);
 
-    % Convert mask.data class from int32 to double for compatability with MP2RAGEimg.
-    mask.data = double(mask.data);
+    		% Convert mask.data class from int32 to double for compatability with MP2RAGEimg.
+    		mask.data = double(mask.data);
 
-    % Check compatibility of mask and UNI image.
-    uni = niftiRead(MP2RAGE.filenameUNI);
-    if size(mask.data) == size(uni.data)
+    		% Check compatibility of mask and UNI image.
+    		uni = niftiRead(MP2RAGE.filenameUNI);
+    		if size(mask.data) ~= size(uni.data)
 
-        % Determine best reg_param for these data.
+			error('Your mask must have the same dimensions as your UNI image. Please check that the mask and mp2rage data are aligned.');
+
+		end
+		
+     	end
+		% Determine best reg_param for these data.
         %reg_param = mp2rage_selectregparam(MP2RAGE, mask.data);
 
 	% Make regtests output directory.
@@ -88,8 +95,15 @@ else
     		MP2RAGEimg = double(MP2RAGEimgRobustPhaseSensitive);
 
     		%% Make mp2rage intensity maps --for only brain tissue-- for this regtest (i.e., r).
-    		%mp2rage_intensity(:, r) = MP2RAGEimg(:).*double(mask.data(:));
-    		     mp2rage_intensity(:, r) = MP2RAGEimg(:);
+    		if exist(config.mask)
+	
+			mp2rage_intensity(:, r) = MP2RAGEimg(:).*double(mask.data(:));
+	
+		else
+	
+			mp2rage_intensity(:, r) = MP2RAGEimg(:);
+	
+		end
 
     		% Convert zeros to NaN.
     		mp2rage_intensity(find(mp2rage_intensity==0)) = NaN;
@@ -294,13 +308,6 @@ else
 	disp(['Best regularization parameters are ' num2str(reg_param_best(1)) ' and ' num2str(reg_param_best(2)) '. Selecting ' num2str(reg_param_best(1)) '.'])
 
 	reg_param = reg_param_best(1);
-
-    else
-
-        error('Your mask must have the same dimensions as your UNI image. Please check that the mask and mp2rage data are aligned.');
-
-    end
-    clear uni;
 
 end
 
