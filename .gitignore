@@ -4,3 +4,4 @@ testdata/*
 output/*
 qa.png
 product.json
+regtests_output/*
