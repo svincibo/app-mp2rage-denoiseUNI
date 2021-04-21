@@ -25,8 +25,8 @@ cat << EOF > product.json
         {
             "type": "image/png",
 	    "name": "Original and Denoised UNIT1",
-            "base64": "$(base64 -w 0 output/qa.png)"
+            "base64": "$(base64 -w 0 qa.png)"
         }
     ]
-}i
+}
 EOF

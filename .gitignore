@@ -2,3 +2,5 @@
 config.json
 testdata/*
 output/*
+qa.png
+product.json

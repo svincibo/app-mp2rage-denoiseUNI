@@ -45,7 +45,7 @@ MP2RAGE.filenameOUT=fullfile('output', 'unit1.nii');
 
 
 % Save image for qa.
-saveas(gcf, fullfile('output', 'qa.png'));
+saveas(gcf, 'qa.png');
 
 % Copy over mag.inv1.nii.gz and mag.inv1.nii.gz from input to output.
 copyfile(config.mag_inv1, fullfile('output', 'mag.inv1.nii.gz'));
