@@ -52,7 +52,7 @@ else
     MP2RAGE.FlipDegrees=[4 5];% Flip angle of the two readouts in degrees
 
     	% Read in mask.
-    	if exist(config.mask)
+    	if isfield(config, 'mask')
     	
 	    	mask = niftiRead(config.mask);
 
@@ -95,7 +95,7 @@ else
     		MP2RAGEimg = double(MP2RAGEimgRobustPhaseSensitive);
 
     		%% Make mp2rage intensity maps --for only brain tissue-- for this regtest (i.e., r).
-    		if exist(config.mask)
+    		if isfield(config, 'mask')
 	
 			mp2rage_intensity(:, r) = MP2RAGEimg(:).*double(mask.data(:));
 	
