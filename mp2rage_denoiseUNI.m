@@ -44,8 +44,8 @@ if ~isempty(config.reg_param)
 else
 
     % Assign constants related to the mp2rage acquisition protocol.
-    MP2RAGE.B0=3;           % in Tesla
-    MP2RAGE.TR=5;           % MP2RAGE TR in seconds
+    MP2RAGE.B0=config.x_inputs.meta.MagneticFieldStrength; % 3;           % in Tesla
+    MP2RAGE.TR=config.x_inputs.meta.RepetitionTime; % 5;           % MP2RAGE TR in seconds
     MP2RAGE.TRFLASH=7.5e-3; % TR of the GRE readout, per Hu: (TI2-TI1)/(number of phase encoding steps) = (2500-700)/(256*93.8%) ms = 7.5 ms.
     MP2RAGE.TIs=[700e-3 2500e-3];% inversion times - time between middle of refocusing pulse and excitatoin of the k-space center encoding
     MP2RAGE.NZslices=[88 88];% Slices Per Slab * [PartialFourierInSlice-0.5  0.5] per Hu: PartialFourierInSlice = 1, so 176*[1-0.5 0.5] = 176*[0.5 0.5] = [88 88].
@@ -320,13 +320,18 @@ saveas(gcf, 'qa.png');
 % Close figure.
 close all;
 
-% Copy over mag.inv1.nii.gz and mag.inv1.nii.gz from input to output.
+% Copy over mag.inv1.nii.gz and mag.inv2.nii.gz from input to output as well as any .json files that exist.
 copyfile(config.mag_inv1, fullfile('output', 'mag.inv1.nii.gz'));
-copyfile(config.json_inv1, fullfile('output', 'mag.inv1.json'));
+if ~isempty(config.json_inv1)
+	copyfile(config.json_inv1, fullfile('output', 'mag.inv1.json'));
+end
 
 copyfile(config.mag_inv2, fullfile('output', 'mag.inv2.nii.gz'));
-copyfile(config.json_inv2, fullfile('output', 'mag.inv2.json'));
+if ~isempty(config.json_inv2)
+	copyfile(config.json_inv2, fullfile('output', 'mag.inv2.json'));
+end
 
-copyfile(config.json_unit1, fullfile('output', 'unit1.json'));
-
+if ~isempty(config.json_unit1)
+	copyfile(config.json_unit1, fullfile('output', 'unit1.json'));
+end
 
