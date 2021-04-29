@@ -1,5 +1,5 @@
 [![Abcdspec-compliant](https://img.shields.io/badge/ABCD_Spec-v1.1-green.svg)](https://github.com/brain-life/abcd-spec)
-[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-bl.app.262-blue.svg)](https://doi.org/10.25663/brainlife.app.262)
+[![Run on Brainlife.io](https://img.shields.io/badge/Brainlife-brainlife.app.506-blue.svg)](https://doi.org/10.25663/brainlife.app.506)
 
 # app-mp2rage-denoiseUNI
 This app denoises an MP2RAGE_UNI image so that it can be used to calculate T1 and R1 maps (see app-mp2rage-calculateT1andR1). The app is capable of selecting the regularization parameter for the denoising step or the user may provide the parameter.
