@@ -43,13 +43,18 @@ if ~isempty(config.reg_param)
 
 else
 
+    % Read in config.json files that are contain the meta-data for each image.
+    config_inv1 = jsondecode(fileread(config.json_inv1));
+    config_inv2 = jsondecode(fileread(config.json_inv2));
+
     % Assign constants related to the mp2rage acquisition protocol.
-    MP2RAGE.B0=config.x_inputs.meta.MagneticFieldStrength; % 3;           % in Tesla
-    MP2RAGE.TR=config.x_inputs.meta.RepetitionTime; % 5;           % MP2RAGE TR in seconds
-    MP2RAGE.TRFLASH=7.5e-3; % TR of the GRE readout, per Hu: (TI2-TI1)/(number of phase encoding steps) = (2500-700)/(256*93.8%) ms = 7.5 ms.
-    MP2RAGE.TIs=[700e-3 2500e-3];% inversion times - time between middle of refocusing pulse and excitatoin of the k-space center encoding
-    MP2RAGE.NZslices=[88 88];% Slices Per Slab * [PartialFourierInSlice-0.5  0.5] per Hu: PartialFourierInSlice = 1, so 176*[1-0.5 0.5] = 176*[0.5 0.5] = [88 88].
-    MP2RAGE.FlipDegrees=[4 5];% Flip angle of the two readouts in degrees
+    MP2RAGE.B0 = config_inv1.MagneticFieldStrength; % in Tesla
+    MP2RAGE.TR = config_inv1.RepetitionTime; % MP2RAGE TR in seconds
+    MP2RAGE.TRFLASH = (config_inv2.InversionTime - config_inv1.InversionTime)/(config_inv1.BaseResolution*(config_inv1.PercentPhaseFOV/100)); % TR of the GRE readout, per Hu: (TI2-TI1)/(number of phase encoding steps) = (2.5-0.7)/(256*.938) ms = 7.5 ms.
+    MP2RAGE.TIs = [config_inv1.InversionTime config_inv2.InversionTime];% inversion times - time between middle of refocusing pulse and excitatoin of the k-space center encoding
+    MP2RAGE.NZslices= 176*[config_inv1.PartialFourier-0.5 0.5]; % Slices Per Slab * [PartialFourierInSlice-0.5  0.5] 
+    % per Hu: PartialFourierInSlice = 1, so 176*[1-0.5 0.5] = 176*[0.5 0.5] = [88 88].
+    MP2RAGE.FlipDegrees = [config_inv1.FlipAngle config_inv2.FlipAngle]; % Flip angle of the two readouts in degrees
 
     	% Read in mask.
     	if isfield(config, 'mask')
