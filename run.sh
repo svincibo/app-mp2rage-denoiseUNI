@@ -10,7 +10,7 @@ set -e
 unit1=`jq -r '.unit1' config.json`
 
 # crop
-robustfov -i ${unit1} -r unit1.cropped.nii.gz
+robustfov -i ${unit1} -m roi2full.mat -r unit1.cropped.nii.gz
 
 # get mask
 bet unit1.cropped.nii.gz unit1.mask.nii.gz -R
