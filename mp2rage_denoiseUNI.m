@@ -80,7 +80,7 @@ else
        error('Sorry -- this app is not yet able to determine the SlicesPerSlab parameter from your metadata. Please look at your MRI sequence protocol to find this value and enter it manually when running the app. Please note that SlicesPerSlab is only needed to calculate the regularization parameter.')
        MP2RAGE.NZslices=config_inv1.SlicesPerSlab.*[config_inv1.PartialFourier-0.5 0.5]; % Slices Per Slab * [PartialFourierInSlice-0.5  0.5] 
     else
-      MP2RAGE.NZslices=str2num(config.slicesperslab).*[config_inv1.PartialFourier-0.5 0.5]; % Slices Per Slab * [PartialFourierInSlice-0.5  0.5] ;
+      MP2RAGE.NZslices=config.slicesperslab.*[config_inv1.PartialFourier-0.5 0.5]; % Slices Per Slab * [PartialFourierInSlice-0.5  0.5] ;
     end
     % per Hu: PartialFourierInSlice = 1, so 176*[1-0.5 0.5] = 176*[0.5 0.5] = [88 88].
     MP2RAGE.FlipDegrees = [config_inv1.FlipAngle config_inv2.FlipAngle]; % Flip angle of the two readouts in degrees
