@@ -113,7 +113,8 @@ else
 
     		%% Make mp2rage intensity maps --for only brain tissue-- for this regtest (i.e., r).
     		%if isfield(config, 'mask')
-	
+disp(size(MP2RAGEimg(:)));
+disp(size(mask.data(:)));
 			mp2rage_intensity(:, r) = MP2RAGEimg(:).*mask.data(:);
 	
 		%else
