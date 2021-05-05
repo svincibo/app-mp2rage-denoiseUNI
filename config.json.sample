@@ -5,7 +5,6 @@
 "json_inv2": "testdata/mag.inv2.json",
 "unit1": "testdata/unit1.nii.gz",
 "json_unit1": "testdata/unit1.json",
-"mask": "testdata/mask.nii.gz",
 "slicesperslab": "176", 
-"reg_param": "16"
+"reg_param": ""
 }

@@ -6,18 +6,19 @@
 
 mkdir -p output
 
+echo "making a brain mask, just in case it is needed"
+time singularity exec -e docker://brainlife/fsl:5.0.9 ./run.sh
+
+echo "processing UNI image for denoising"
 singularity exec -e docker://brainlife/mcr:2020a ./compiled/mp2rage_denoiseUNI
 
-#matlab -nosplash -nodisplay -r mp2rage_denoiseUNI.m
-
+# denoise UNI image code outputs an un-gzipped .nii file, so gzip it for forward compatability
 gzip ./output/unit1.nii
 
 if [ ! -f ./output/unit1.nii.gz ]; then
        echo "mp2rage_denoiseUNI.m didn't produce a denoised unit1.nii.gz file"
        exit 1
 fi
-
-echo "all done"
 
 cat << EOF > product.json
 {
@@ -30,3 +31,5 @@ cat << EOF > product.json
     ]
 }
 EOF
+
+echo "all done!"
