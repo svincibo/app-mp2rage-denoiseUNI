@@ -13,7 +13,7 @@ echo "processing UNI image for denoising"
 singularity exec -e docker://brainlife/mcr:2020a ./compiled/mp2rage_denoiseUNI
 
 # denoise UNI image code outputs an un-gzipped .nii file, so gzip it for forward compatability
-gzip ./output/unit1.nii.gz
+gzip ./output/unit1.nii
 
 if [ ! -f ./output/unit1.nii.gz ]; then
        echo "mp2rage_denoiseUNI.m didn't produce a denoised unit1.nii.gz file"
